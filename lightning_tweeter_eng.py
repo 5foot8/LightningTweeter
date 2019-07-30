@@ -64,7 +64,7 @@ def handle_interrupt(channel):
         distance = sensor.get_distance()
         energy = sensor.get_energy()
         print("Energy: " + str(energy) + " - distance: " + str(distance) + "km")
-        # Yes, it tweets in French. Baguette.
+        # Yes, it now tweets in English. Sausage-Roll.
         if strikes_since_last_alert == 0:
             thread.start_new_thread(send_tweet, (
                 "Lightning dectected ! Energy : {0} - distance to front of storm : {1}km".format(energy, distance),))
