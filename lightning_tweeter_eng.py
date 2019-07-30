@@ -67,17 +67,17 @@ def handle_interrupt(channel):
         # Yes, it tweets in French. Baguette.
         if strikes_since_last_alert == 0:
             thread.start_new_thread(send_tweet, (
-                "Eclair détecté ! Puissance : {0} - distance du front de tempête : {1}km".format(energy, distance),))
+                "Lightning dectected ! Energy : {0} - distance to front of storm : {1}km".format(energy, distance),))
         else:
             thread.start_new_thread(send_tweet, (
-                "/!\ {2} éclairs détectés ces {3} dernières minutes. Puissance dernier éclair : {0} - distance du front de tempête : {1}km".format(
+                "/!\ {2} Lightning detected in the last {3} minutes. Energy of last strike : {0} - distance to front of storm : {1}km".format(
                     energy, distance, strikes_since_last_alert + 1, (current_timestamp - last_alert).seconds / 60),))
             strikes_since_last_alert = 0
         last_alert = current_timestamp
     # If no strike has been detected for the last hour, reset the strikes_since_last_alert (consider storm finished)
     if (current_timestamp - last_alert).seconds > 1800 and last_alert != datetime.min:
         thread.start_new_thread(send_tweet, (
-                "\o/ Orage terminé. Aucun nouvel éclair détecté depuis 1/2h.",))
+                "\o/ Thunderstorm completed. No new lightning detected since 1/2h.",))
         strikes_since_last_alert = 0
         last_alert = datetime.min
 
